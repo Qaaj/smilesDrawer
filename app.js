@@ -40,15 +40,15 @@ SmilesDrawer.clean = function(smiles) {
 * @param {String} [themeName='light'] The theme to apply.
 * @param {Function} [onError='null'] A callback function providing an error object.
 */
-SmilesDrawer.apply = function(options, selector='canvas[data-smiles]', themeName='light', onError=null) {
+SmilesDrawer.apply = function(options, selector, themeName, onError) {
   let smilesDrawer = new Drawer(options);
-  let elements = document.querySelectorAll(selector);
+  let elements = document.querySelectorAll(selector || 'canvas[data-smiles]');
 
   for (var i = 0; i < elements.length; i++) {
       let element = elements[i];
 
       SmilesDrawer.parse(element.getAttribute('data-smiles'), function(tree) {
-          smilesDrawer.draw(tree, element, themeName, false);
+          smilesDrawer.draw(tree, element, themeName || 'light', false);
       }, function(err) {
         if (onError) {
           onError(err);
@@ -59,7 +59,7 @@ SmilesDrawer.apply = function(options, selector='canvas[data-smiles]', themeName
 
 /**
 * Parses the entered smiles string.
-* 
+*
 * @static
 * @param {String} smiles A SMILES string.
 * @param {Function} successCallback A callback that is called on success with the parse tree.

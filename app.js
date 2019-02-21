@@ -41,11 +41,11 @@ SmilesDrawer.clean = function(smiles) {
 * @param {Function} [onError='null'] A callback function providing an error object.
 */
 SmilesDrawer.apply = function(options, selector, themeName, onError) {
-  let smilesDrawer = new Drawer(options);
-  let elements = document.querySelectorAll(selector || 'canvas[data-smiles]');
+  var smilesDrawer = new Drawer(options);
+  var elements = document.querySelectorAll(selector || 'canvas[data-smiles]');
 
   for (var i = 0; i < elements.length; i++) {
-      let element = elements[i];
+      var element = elements[i];
 
       SmilesDrawer.parse(element.getAttribute('data-smiles'), function(tree) {
           smilesDrawer.draw(tree, element, themeName || 'light', false);
